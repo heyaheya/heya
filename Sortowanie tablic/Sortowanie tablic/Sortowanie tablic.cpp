@@ -8,7 +8,7 @@
 #include "string"
 #include "windows.h"
 
-
+//test
 
 
 //zapis umo?liwiajacy skrócenie zapisu polece? std::
