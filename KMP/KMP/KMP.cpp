@@ -1,65 +1,54 @@
 #include "stdafx.h"
-//#include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
-//#include <fstream>
-//#include <vector>
 
 
-//program glowny1
+/*
+65-90 [A-Z]
+97-122 [a-z]
+funkcja spr czy znak jest z zakresu 
+*/
+
+int sprCzyZakres(int x)
+{
+	
+	if (((x > 64) && (x < 91)) || ((x>96) && (x < 123)))	
+		return 1;
+	else
+		return 0;
+}
+
+
 int main(int argc, char *argv[])
 
 {
-	char sZadan[100000];
-	//    int iZadan;
-	char wzorzecP[100000];
-	char kmpNext[100000];
-	int liczbaPetli;
-	int wzorzec;
-	int liczbaWzorca;
-	int iloscZadan;
-	int znak;
 
-	scanf("%s", sZadan);
+	char wzorzecP[10000];
+	char zestawZnakow[10000];
+	int iloscZadan, wzorzec;
 
-	for (int t = 0; t<100000; t++)
-	{
-		znak = sZadan[t];
-		if (znak != 10)
-			iloscZadan = t;
-		//printf("niemozliwe = %i", iloscZadan);
-		break;
-	}
-
-
-	liczbaPetli = iloscZadan + 1;
-	for (int i = 0; i < liczbaPetli; i++)
+	scanf("%i", &iloscZadan);
+	
+	for (int i = 0; i < iloscZadan; i++)
 	{
 		scanf("%i", &wzorzec);
-		liczbaWzorca = wzorzec;
-
 		scanf("%s", wzorzecP);
-		scanf("%s", kmpNext);
+		scanf("%s", zestawZnakow);
 
 
-
-		for (int k = 0; k < 100000; k++) //petla po ilosci spr
+		for (int k = 0; k < 10000; k++) //petla po ilosci spr
 		{
-			for (int j = 0; j < liczbaWzorca; j++)
+			for (int j = 0; j < wzorzec; j++)
 			{
-
-				if ((wzorzecP[j] == kmpNext[k + j])) //&& (wzorzecP[j] !=10))
+				if (((wzorzecP[j] == zestawZnakow[k + j])) && (sprCzyZakres(zestawZnakow[k + j])==1))
 				{
-					//znak=wzorzecP[j];
-					if (j == 2)
+					if (j == wzorzec-1)
 						printf("%i\n", k);
-
 				}
 				else
 				{
 					break;
 				}
-
 			}
 		}
 	}
