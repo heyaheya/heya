@@ -30,10 +30,9 @@ int main(int argc, char *argv[])
 
 		for (int i = a; i <= b; i++)
 		{
-
-			//znak = i;
-			printf("%1s ", i);
-			if (i = petla - 1)
+			znak = i;
+			printf("%c ", znak);
+			if (i == b)
 				printf("\n");
 		}
 
