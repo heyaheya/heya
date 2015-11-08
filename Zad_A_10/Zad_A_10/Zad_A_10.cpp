@@ -9,6 +9,8 @@
 
 //_CRT_SECURE_NO_WARNINGS
 
+using namespace std;
+
 /*
 ((x >= 65) && (x <= 90))     male litery  (65-90) [A-Z]
 ((x >= 97) && (x <= 122))    wielkie litery (97-122) [a-z]
@@ -48,41 +50,54 @@ int sprCzyLiteraCyfra(int x)
 
 
 
-//do zrobienia f-cja wczytaj
-
-int wczytaj (char tab1[])
+int wczytaj (char *tab1)
 {
-	//wykonanie petli na scanf
-	int t = 0;
-	char tabx[31];
-	int liczbaZnakow;
-	scanf("%d", tabx);
-	liczbaZnakow = tabx[0];
 
-	for (t = 0; t<liczbaZnakow; t++ )
-		while (scanf("%1s", tab1) > -1);
+	int t = 0;
+
+	int liczbaZnakow;
+	scanf("%i", &liczbaZnakow);
+	// liczbaZnakow = tabx[0];
+	char a;
+		
+	//wykonanie petli na scanf
+	while ((scanf("%c", &a) > -1) && (t<=liczbaZnakow-1))
+	{
+		if (a != ' ')
 		{
-			//scanf("%30s", tab2);
-			printf("%c", tab1[t]);
+			tab1[t] = a;
+			t++;
 		}
+	}
+
 	return liczbaZnakow;
 }
 
-//do zrobienia f-cja wypisz
-int wypisz(int tab2[], int liczbaZnakow)
+
+
+
+
+int wypisz(char *tab1, int liczbaZnakow)
 {
+	char znak;
 	for (int i = 0; i < liczbaZnakow; i++)
 	{
-		printf("%c ", tab2[i]);
+		znak = tab1[i];
+		printf("%c ", tab1[i]);
 	}
-	printf("\n");
 	return 0;
 }
 
-//do zrobienia f-cja odwroc 
-int odwroc(char tab1[], char tab2[],int ilosc)
+
+
+ 
+int odwroc(char *tab1, char *tab2,int ilosc)
 {
-	
+	for (int i = 0; i < ilosc; i++)
+	{
+		tab2[i] = tab1[ilosc - i - 1];
+	}
+
 	return 0;
 }
 
@@ -91,9 +106,8 @@ int main(int argc, char *argv[])
 
 {
 	int petla=0;
-	char znak;
-	char tab1[31];
-	char tab2[31];
+	char tab1[30];
+	char tab2[30];
 	int liczbaZnakow=0;
 
 	/*
@@ -112,69 +126,29 @@ int main(int argc, char *argv[])
 	for (int k = 0; k < petla; k++)
 	{
 
-		
-		//scanf("%30s", tab1);
-		
-		liczbaZnakow = wczytaj(tab1);
-
-		//drugi znak
-		znak = tab1[1];
-		x = znak;
-		//pierwszy znak
-		znak = tab1[0];
-		y = znak;
+		//f-cja wczytaj
+		liczbaZnakow= wczytaj(tab1);
 	
-
-
-
-		//spr. czy drugi znak tekstu to cyfra, aby odczytac liczbe znakow w tekscie 
-		if (sprCzyLiteraCyfra(x) == 1)
-		{
-			liczbaZnakow = 10 * (y-48) + x-48;
-			i = 1;
-		}
-		else
-		{
-			liczbaZnakow = y-48;
-		}
-
-		//
-
-
-
-
-		int b = 0;
-		for (int m = i+1; m < liczbaZnakow + 1 + i; m++)
-		{
-			//
-			znak = tab1[m];
-			tab2[liczbaZnakow - b -1] = tab1[m];
-			//printf("%1c", znak);
-			b++;
-		}
-		
-		//printf("\n");
-		
-
-		//funkcja wypisz
-
-
-		for (int n = 0; n < liczbaZnakow ; n++)
-		{
-			printf("%1c",tab2[n]);
-		}
-
-
-
+	
+		//f-cja wypisz		
+		wypisz(tab1, liczbaZnakow);
 
 		printf("\n");
+
+		//funkcja odwroc
+		odwroc(tab1, tab2, liczbaZnakow);
+
+		//f-cja wypisz
+		wypisz(tab2, liczbaZnakow);
+		printf("\n \n");
 
 	}
 
 	//free tab1;
-//	delete	tab1;
+	//	delete	tab1;
 	//delete tab2;
 	//free tab2;
 
+	system("pause");
 	return 0;
 }
