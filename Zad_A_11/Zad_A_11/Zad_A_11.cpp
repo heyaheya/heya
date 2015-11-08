@@ -90,11 +90,11 @@ int alokuj(int liczba)
 
 int wypelnij(int *tab, int liczba)
 {
-	int kkk = 0;
+	//int kkk = 0;
 	for (int i = 0; i < liczba; i++)
 	{
 		*(tab + i) = liczba - i;
-		kkk = *(tab + i);
+		//kkk = *(tab + i);
 	}
 	return 0;
 }
