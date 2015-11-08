@@ -1,13 +1,10 @@
 #include "stdafx.h"
-#include <stdio.h>
 #include <iostream>
+#include <stdio.h>      /* printf, scanf, puts */
+#include <stdlib.h>     /* realloc, free, exit, NULL */
 
 
-/*
-65-90 [A-Z]
-97-122 [a-z]
-funkcja spr czy znak jest z zakresu 
-*/
+
 
 int sprCzyZakres(int x)
 {
@@ -23,26 +20,74 @@ int main(int argc, char *argv[])
 
 {
 	//zrobiæ przez stworzenie tablicy dynamicznej - f-cja malloc wyk³ad cpp str 89
-	char wzorzecP[10000];
-	char zestawZnakow[10000];
-	int iloscZadan, wzorzec;
+
+	int iloscZadan;
+	size_t wzorzec1;
+	char *wzorzecP;
+	char *zestawZnakow;
+	int g = 1;
+	char znak;
+	int iloscZnakow;
+	int wzorzec = 0;
 
 	scanf("%i", &iloscZadan);
 	
 	for (int i = 0; i < iloscZadan; i++)
 	{
 		scanf("%i", &wzorzec);
-		scanf("%s", wzorzecP);
-		scanf("%s", zestawZnakow);
+		wzorzec1 = wzorzec;
+		wzorzecP = (char*)malloc(wzorzec1 * sizeof(char));
+		
+		scanf("%c", &znak);
 
-
-		for (int k = 0; k < 10000; k++) //petla po ilosci spr
+		for (int d = 0; d < wzorzec; d++)
 		{
-			for (int j = 0; j < wzorzec; j++)
+			scanf("%c", &znak);
+			wzorzecP[d] = znak;
+		}
+
+		zestawZnakow = (char*)malloc(1 * sizeof(char));
+		g = 0;
+
+		scanf("%c", &znak);
+		int wynik = 0;
+		
+		do
+		{
+			wynik = (scanf("%c", &znak));
+
+			if ((znak == 10) || (wynik < 0))
 			{
-				if (((wzorzecP[j] == zestawZnakow[k + j])) && (sprCzyZakres(zestawZnakow[k + j])==1))
+				wynik = -1;
+			}
+			else
+			{
+
+				if (g != 0)
 				{
-					if (j == wzorzec-1)
+					zestawZnakow = (char*)realloc(zestawZnakow, (g + 1) * sizeof(char));
+				}
+
+				//*(zestawZnakow + g) = znak;
+				zestawZnakow[g] = znak;
+
+				g++;
+
+			}
+		} while (wynik>0);
+		
+		
+
+		iloscZnakow = wzorzec;
+
+
+		for (int k = 0; k < g; k++) //petla po ilosci spr
+		{
+			for (int j = 0; j < iloscZnakow; j++)
+			{
+				if (((wzorzecP[j] == zestawZnakow[k + j]))) // && (sprCzyZakres(zestawZnakow[k + j])==1))
+				{
+					if (j == iloscZnakow -1)
 						printf("%i\n", k);
 				}
 				else
