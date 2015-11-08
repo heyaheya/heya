@@ -49,23 +49,40 @@ int sprCzyLiteraCyfra(int x)
 
 
 //do zrobienia f-cja wczytaj
-int wczytaj ()
-{
 
-	return 0;
+int wczytaj (char tab1[])
+{
+	//wykonanie petli na scanf
+	int t = 0;
+	char tabx[31];
+	int liczbaZnakow;
+	scanf("%d", tabx);
+	liczbaZnakow = tabx[0];
+
+	for (t = 0; t<liczbaZnakow; t++ )
+		while (scanf("%1s", tab1) > -1);
+		{
+			//scanf("%30s", tab2);
+			printf("%c", tab1[t]);
+		}
+	return liczbaZnakow;
 }
 
 //do zrobienia f-cja wypisz
-int wypisz()
+int wypisz(int tab2[], int liczbaZnakow)
 {
-
+	for (int i = 0; i < liczbaZnakow; i++)
+	{
+		printf("%c ", tab2[i]);
+	}
+	printf("\n");
 	return 0;
 }
 
 //do zrobienia f-cja odwroc 
-int odwroc()
+int odwroc(char tab1[], char tab2[],int ilosc)
 {
-
+	
 	return 0;
 }
 
@@ -96,8 +113,9 @@ int main(int argc, char *argv[])
 	{
 
 		
-		scanf("%30s", tab1);
+		//scanf("%30s", tab1);
 		
+		liczbaZnakow = wczytaj(tab1);
 
 		//drugi znak
 		znak = tab1[1];
@@ -138,7 +156,9 @@ int main(int argc, char *argv[])
 		//printf("\n");
 		
 
-		
+		//funkcja wypisz
+
+
 		for (int n = 0; n < liczbaZnakow ; n++)
 		{
 			printf("%1c",tab2[n]);
@@ -147,11 +167,14 @@ int main(int argc, char *argv[])
 
 
 
-
-
-
 		printf("\n");
 
 	}
+
+	//free tab1;
+//	delete	tab1;
+	//delete tab2;
+	//free tab2;
+
 	return 0;
 }

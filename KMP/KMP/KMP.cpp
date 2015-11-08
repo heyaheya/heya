@@ -22,7 +22,7 @@ int sprCzyZakres(int x)
 int main(int argc, char *argv[])
 
 {
-
+	//zrobiæ przez stworzenie tablicy dynamicznej - f-cja malloc wyk³ad cpp str 89
 	char wzorzecP[10000];
 	char zestawZnakow[10000];
 	int iloscZadan, wzorzec;
