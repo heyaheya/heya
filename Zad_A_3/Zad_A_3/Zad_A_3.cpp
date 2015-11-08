@@ -9,9 +9,7 @@
 //_CRT_SECURE_NO_WARNINGS
 
 int main(int argc, char *argv[])
-
 {
-
 	float w,a,b,c;
 
 	printf("Program liczy srednia trzech liczb.\n");

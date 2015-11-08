@@ -24,7 +24,6 @@ int main(int argc, char *argv[])
 	scanf("%i", &petla);
 	
 	for (int k = 0; k < petla; k++)
-
 	{
 		scanf("%1s %1s", &a, &b);
 

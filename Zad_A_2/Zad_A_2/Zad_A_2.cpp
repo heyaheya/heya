@@ -31,8 +31,7 @@ int main(int argc, char *argv[])
 	//printf("\n");
 
 	printf("Wspolrzedne wektora wynosza (x y) %.2f %.2f", x1 - x2, y1 - y2);
-
-
+	
 	return 0;
 }
 

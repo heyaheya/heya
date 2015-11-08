@@ -49,7 +49,6 @@ int sprCzyLiteraCyfra(int x)
 
 
 
-
 int wczytaj (char *tab1)
 {
 

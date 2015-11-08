@@ -101,7 +101,6 @@ int wypelnij(int *tab, int liczba)
 
 
 int main(int argc, char *argv[])
-
 {
 	int liczbaZnakow = 0;
 
