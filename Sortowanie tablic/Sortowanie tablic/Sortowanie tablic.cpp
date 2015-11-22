@@ -7,6 +7,8 @@
 #include "fstream"
 #include "string"
 #include "windows.h"
+#include <time.h>
+#include <string.h>
 
 //test
 
@@ -14,17 +16,21 @@
 //zapis umo?liwiajacy skrócenie zapisu polece? std::
 using namespace std;
 
+//f-cja zapisu tablicy danych do pliku
+int zapiszDaneDoPliku(char nazwa[100], int *tablicaDanych, int liczbaS);
+
+
 
 //funkcja sortowania szybkiego
-void quicksort(int tablica[], int lewy, int prawy)
+void quicksort(int *tablicaDanych, int lewy, int prawy)
 {
 
 	int i = lewy;
 	int j = prawy;
-	int x = tablica[(lewy + prawy) >> 1];
+	int x = tablicaDanych[(lewy + prawy) >> 1];
 
 	int s = (lewy + prawy) / 2;
-	s = (lewy + prawy) >> 1;
+	s = (lewy + prawy) >> 1; //dzielenie binarne
 	//int x=tablica[(lewy+prawy)/2];
 
 	int licznik_q = 0;
@@ -32,139 +38,90 @@ void quicksort(int tablica[], int lewy, int prawy)
 	do
 	{
 
-		while (tablica[i]<x) i++; //szukam  elementu po prawej stronie  mniejszego od x - od i do j
+		while (tablicaDanych[i]<x) i++; //szukam  elementu po prawej stronie  mniejszego od x - od i do j
 
-		while (tablica[j]>x) j--;
+		while (tablicaDanych[j]>x) j--;
 
-		if (i <= j)  //jezeli
+		if (i <= j)  
 		{
-			int temp = tablica[i];
-			tablica[i] = tablica[j];
-			tablica[j] = temp;
+			int temp = tablicaDanych[i];
+			tablicaDanych[i] = tablicaDanych[j];
+			tablicaDanych[j] = temp;
 			i++;
 			j--;
 		}
 	} while (i <= j);
 
 	if (lewy<j)
-		quicksort(tablica, lewy, j);
+		quicksort(tablicaDanych, lewy, j);
 
 	if (prawy>i)
-		quicksort(tablica, i, prawy);
+		quicksort(tablicaDanych, i, prawy);
 }
 
 
 
 
-//program g?owny1
+//program
 int main(void)
 
 {
 	//deklaracja zmiennych
-	int rozmiarTablicy = 100000;
+	int rozmiarTablicy = 10;
 
-	//cout << "Podaj ilosc liczb: ";
-	//cin >> rozmiarTablicy;
+	int iloscWyswietlanychDanych = 10;
 
-	fstream plik;
-	string nazwaPliku;
+	//zape³nienie tablicy liczbami losowymi
 
+	int liczba = 0;
 
-	int tablicaDanych[100000];
-
-	for (int i0 = 0; i0 < rozmiarTablicy; i0++)
-		tablicaDanych[i0] = 0;
+	//losowanie tablicy
 
 
-	int tmp = 0;
+	int los = 0;
 
-	//cout << "Podaj nazwe pliku (domyslnie rozszerzenie: .txt): ";
-	//cin >> nazwaPliku;
-	nazwaPliku = "dane100tys";
+	srand((unsigned)time(NULL));
+
+	int zakresMin, zakresMax;
+
+	cout << "Podaj dolny zakresu danych: ";
+	cin >> zakresMin;
+
+	cout << "Podaj gorny zakres danych: ";
+	cin >> zakresMax;
+
+	cout << "Podaj ilosc losow: ";
+	cin >> rozmiarTablicy;
+
+
+
+	int *tablicaDanych = new int[rozmiarTablicy];
+
+	
+	for (int i = 0; i < rozmiarTablicy; i++)
+	{
+		los = (double)rand() / (RAND_MAX + 1) * (zakresMax - zakresMin) + zakresMin;
+		liczba = int(los);
+		//cout << liczba << "  ";
+		tablicaDanych[i] = liczba;
+	}
+
+
+	std::cout << std::endl;
+
+	//zapis do pliku
+	//zapis danych do pliku
+	char nazwaPliku[100];
+	cout << "Podaj nazwe pliku (domyslnie rozszerzenie: .dat): ";
+	cin >> nazwaPliku;
+	zapiszDaneDoPliku(nazwaPliku, tablicaDanych, rozmiarTablicy);
+
 
 
 
 	std::cout << std::endl;
 
-	nazwaPliku = nazwaPliku + ".txt";
-	plik.open(nazwaPliku.c_str(), ios::in);
-
-	if (!plik)
-	{
-		cout << "Nie mozna otworzyc pliku";
-		getchar();
-		return 1;
-	}
-
-	while (!plik.eof())
-		plik >> tablicaDanych[tmp++];
-
-
-
-
-	//wyswietlenie 5 pierwszych liczb z tablicy
-	for (int i = 0; i < 5; i++)
-	{
-		std::cout << tablicaDanych[i] << std::endl;
-	}
-
-
-	//*****************************
-	//sortowanie
-	std::cout << "1 - Sortowanie przez wstawianie" << std::endl;
-	std::cout << "2 - Sortowanie szybkie (quicksort)" << std::endl;
-	std::cout << "3 - Sortowanie przez kopcowanie (sortowanie stogowe)" << std::endl;
-	std::cout << "Podaj sposob sortowania:";
-	int liczba;
-std:cin >> liczba;
-
-	int dana1 = 0, dana2 = 0;
-
-
-	switch (liczba)
-	{
-	case 1: //Sortowanie przez wstawianie
-	{
-
-		int temp = 0, k = 0;
-		for (int i = 1; i < rozmiarTablicy; i++)
-		{
-
-
-
-			for (k = 0; k < i; k++)
-			{
-
-				if (tablicaDanych[i - 1 - k] > tablicaDanych[i - k])
-				{
-					temp = tablicaDanych[i - 1 - k];
-					tablicaDanych[i - 1 - k] = tablicaDanych[i - k];
-					tablicaDanych[i - k] = temp;
-
-
-				}
-			}
-		}
-
-		break;
-	}
-
-
-	case 2: //Sortowanie szybkie (quicksort)
-	{
-
-		//przed sortowaniem
-		//wyswietlenie 5 pierwszych liczb z tablicy
-		for (int i = 0; i < 5; i++)
-		{
-			std::cout << tablicaDanych[i] << " ";
-		}
-		std::cout << std::endl;
-
-
-
-
-
+	
 
 		//wywo³anie funkcji szybkiego sortowania
 
@@ -174,7 +131,7 @@ std:cin >> liczba;
 		b = tablicaDanych[rozmiarTablicy / 2];
 		c = tablicaDanych[rozmiarTablicy - 1];
 
-		std::cout << "a-" << a << "  b-" << b << "  c-" << c << std::endl;
+		//std::cout << "a-" << a << "  b-" << b << "  c-" << c << std::endl;
 
 		if ((a > b) && (a > c))
 		{
@@ -200,57 +157,72 @@ std:cin >> liczba;
 				s = a;
 		}
 
-		std::cout << "s-" << s << std::endl;
+		//std::cout << "s-" << s << std::endl;
 
 
 
 		quicksort(tablicaDanych, 0, rozmiarTablicy - 1);
 
+		//zapis do pliku
+		//zapis danych do pliku
+		std::cout << std::endl;
+		cout << "Podaj nazwe pliku (domyslnie rozszerzenie: .dat): ";
+		cin >> nazwaPliku;
+		zapiszDaneDoPliku(nazwaPliku, tablicaDanych, rozmiarTablicy);
+
 
 
 		//po sortowaniu
 		//wyswietlenie 5 pierwszych liczb z tablicy
-		for (int i = 0; i < 5; i++)
+		/*
+		for (int i = 0; i <  iloscWyswietlanychDanych ; i++)
 		{
 			std::cout << tablicaDanych[i] << " ";
 		}
+
+		*/
 		std::cout << std::endl;
 
 
 
-		break;
-	}
-
-	case 3:  //Sortowanie przez kopcowanie (sortowanie stogowe)
-		std::cout << "Niestety metoda jeszcze nie dzia³a :(" << std::endl;
-		break;
-	default:
-		std::cout << "nie wybrano poprawnie" << std::endl;
-		break;
-	}
+		system("PAUSE");
+	return 0;
+}
 
 
-
+//f-cja zapisu tablicy danych do pliku
+int zapiszDaneDoPliku(char nazwa[100], int *tablicaDanych, int liczbaS)
+{
 
 	//zapisanie wynikow do pliku
 	fstream plik_wynik;
-	nazwaPliku = "wynik.txt";
-	plik_wynik.open(nazwaPliku.c_str(), ios::out); // .c_str konwertuje zmienna do wersji C
+
+
+	strcat(nazwa, ".dat");
+
+	plik_wynik.open(nazwa, ios::out | ios::out);
 	if (!plik_wynik.good())
 	{
-		cout << "Nie udalo sie utworzyc pliku!\n";
+
+		cout << "Nie udalo sie utworzyc pliku ! ! !" << endl;
+		return 1;
 	}
 	else
 	{
 		cout << "Plik utworzony!\n";
 	}
 
+	string str1, str2;
 
-	for (int i = 0; i < rozmiarTablicy; i++)
+	
+	for (int i = 0; i < liczbaS; i++)
 	{
-		plik_wynik << tablicaDanych[i] << " ";
+		
+		plik_wynik << tablicaDanych [i]<< " ";
 	}
+
+	
+	plik_wynik.close();
 
 	return 0;
 }
-
