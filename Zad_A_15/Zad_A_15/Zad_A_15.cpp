@@ -41,8 +41,6 @@ int main()
 	student *tab;
 	tab = (student*)malloc(liczbaS * sizeof(student));
 
-    //	string str3;
-	//char znaki[20];
 
 	for (int i = 0; i < liczbaS; ++i)
 	{
@@ -74,15 +72,12 @@ int main()
 	cin >> nazwa;
 	zapiszDaneDoPliku(nazwa, tab, liczbaS);
 
-
-
 	//wywo³anie f-cji sortowania		
 	char nazwaPliku[100];
 	cout << endl << endl;
 	cout << "Podaj nazwe pliku z danymi do posortowania (domyslnie .dat): ";
 	cin >> nazwaPliku;
 	sortujPlikPoNazwisku(nazwaPliku);
-	
 
 	system("pause");
 	return 0;
@@ -114,12 +109,6 @@ int zapiszDaneDoPliku(char nazwa[100], student *tab, int liczbaS)
 		for (int i = 0; i < liczbaS; i++)
 		{
 			plik_wynik << tab[i].imie << endl << tab[i].nazwisko << endl << tab[i].rok << endl;
-			/*
-			str1 = tab[i].imie;
-			str2 = tab[i].nazwisko;
-			licz = tab[i].rok;
-			plik_wynik << str1 << endl << str2 << endl << licz << endl;
-			*/
 		}
 
 		plik_wynik.close();		
@@ -173,7 +162,6 @@ int sortujPlikPoNazwisku(char nazwaPliku[100])
 	plik.close();
 
 	liczbaS--;
-	//int pozycja = 0;
 
 	//wyswietl dane
 	cout << endl;
