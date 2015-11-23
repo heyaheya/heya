@@ -102,12 +102,15 @@ int main(void)
 	{
 		los = (double)rand() / (RAND_MAX + 1) * (zakresMax - zakresMin) + zakresMin;
 		liczba = int(los);
-		//cout << liczba << "  ";
+		cout << liczba << "  ";
 		tablicaDanych[i] = liczba;
 	}
 
 
 	std::cout << std::endl;
+
+
+	/*
 
 	//zapis do pliku
 	//zapis danych do pliku
@@ -116,71 +119,16 @@ int main(void)
 	cin >> nazwaPliku;
 	zapiszDaneDoPliku(nazwaPliku, tablicaDanych, rozmiarTablicy);
 
-
+	*/
 
 
 	std::cout << std::endl;
 
-	
-
-		//wywo³anie funkcji szybkiego sortowania
-
-		//wyznaczenie wartoœci srodkowej
-		int a = 0, b = 0, c = 0, s = 0;
-		a = tablicaDanych[0];
-		b = tablicaDanych[rozmiarTablicy / 2];
-		c = tablicaDanych[rozmiarTablicy - 1];
-
-		//std::cout << "a-" << a << "  b-" << b << "  c-" << c << std::endl;
-
-		if ((a > b) && (a > c))
-		{
-			if (b > c)
-				s = b;
-			else
-				s = c;
-		}
-
-		if ((b > a) && (b > c))
-		{
-			if (a > c)
-				s = a;
-			else
-				s = c;
-		}
-
-		if ((c > b) && (c > a))
-		{
-			if (b > a)
-				s = b;
-			else
-				s = a;
-		}
-
-		//std::cout << "s-" << s << std::endl;
 
 
 
-		quicksort(tablicaDanych, 0, rozmiarTablicy - 1);
-
-		//zapis do pliku
-		//zapis danych do pliku
-		std::cout << std::endl;
-		cout << "Podaj nazwe pliku (domyslnie rozszerzenie: .dat): ";
-		cin >> nazwaPliku;
-		zapiszDaneDoPliku(nazwaPliku, tablicaDanych, rozmiarTablicy);
 
 
-
-		//po sortowaniu
-		//wyswietlenie 5 pierwszych liczb z tablicy
-		/*
-		for (int i = 0; i <  iloscWyswietlanychDanych ; i++)
-		{
-			std::cout << tablicaDanych[i] << " ";
-		}
-
-		*/
 		std::cout << std::endl;
 
 
