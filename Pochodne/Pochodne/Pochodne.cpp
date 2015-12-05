@@ -1,5 +1,6 @@
-// Pochodne.cpp: Okreœla punkt wejœcia dla aplikacji konsoli.
+// Calka MonteCarlo.cpp: Okreœla punkt wejœcia dla aplikacji konsoli.
 //
+
 
 #include "stdafx.h"
 #include <stdio.h>
@@ -20,12 +21,12 @@ float f(float x)
 
 float pochodna1(float x, float h)
 {
-		return ((f(x + h) - f(x - h)) / (2 * h));
+	return ((f(x + h) - f(x - h)) / (2 * h));
 }
 
 float pochodna2(float x, float h)
 {
-	return ((f(x + h) + f(x - h) -2 *f(x)) / (h * h));
+	return ((f(x + h) + f(x - h) - 2 * f(x)) / (h * h));
 }
 
 int main()
@@ -42,6 +43,7 @@ int main()
 	cout << "Druga pochodna f-cji wynosi: " << pochodna2(x, h) << endl;
 
 	system("PAUSE");
-    return 0;
+	return 0;
 }
+
 

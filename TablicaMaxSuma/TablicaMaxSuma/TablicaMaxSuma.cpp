@@ -49,12 +49,10 @@ int WyszukajSumaMaxAlgLiniowy(int *tab, int liczbaS,int minP)
 		{
 			minZ = j;
 			break;
-		}
-		
+		}		
 	}
 
 	
-
 	cout << endl << "Suma maksymalna: " << maxsofar << endl;
 	cout << "w przedziale: " << minZ + 1 << " ___ " << maxZ +1 << endl << endl;
 	
